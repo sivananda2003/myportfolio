@@ -38,6 +38,24 @@
             line-height: 1.5;
             margin-top: 20px;
         }
+        .profile-pic {
+            border-radius: 50%;
+            width: 300px; /* Tripled size */
+            height: 300px; /* Tripled size */
+            object-fit: cover;
+            position: fixed; /* Fix the position */
+            top: 20px; /* Adjust as needed */
+            left: 20px; /* Adjust as needed */
+            opacity: 0; /* Initially hidden */
+            transition: opacity 0.3s ease; /* Smooth transition for visibility */
+            z-index: 1000; /* Ensure it stays on top */
+        }
+        .profile-pic.visible {
+            opacity: 1; /* Visible when class is added */
+        }
+        .header-content {
+            margin-left: 340px; /* Adjust for profile picture width */
+        }
     </style>
 </head>
 <body class="landing is-preload">
@@ -47,25 +65,30 @@
 
         <!-- Header -->
         <header id="header" class="alt">
-            <h1><a href="index.html">Sivananda Kumar C</a></h1>
-            <nav id="nav">
-                <ul>
-                    <li><a href="#banner">Home</a></li>
-                    <li class="special">
-                        <a href="#menu" class="menuToggle"><span>Menu</span></a>
-                        <div id="menu">
-                            <ul>
-                                <li><a href="#education">Education</a></li>
-                                <li><a href="#certifications">Certifications</a></li>
-                                <li><a href="#projects">Projects</a></li>
-                                <li><a href="#internships">Internships</a></li>
-                                <li><a href="#cta">Contact</a></li> <!-- Updated ID here -->
-                            </ul>
-                        </div>
-                    </li>
-                </ul>
-            </nav>
+            <div class="header-content">
+                <h1><a href="index.html">Sivananda Kumar C</a></h1>
+                <nav id="nav">
+                    <ul>
+                        <li><a href="#banner">Home</a></li>
+                        <li class="special">
+                            <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                            <div id="menu">
+                                <ul>
+                                    <li><a href="#education">Education</a></li>
+                                    <li><a href="#certifications">Certifications</a></li>
+                                    <li><a href="#projects">Projects</a></li>
+                                    <li><a href="#internships">Internships</a></li>
+                                    <li><a href="#cta">Contact</a></li> <!-- Updated ID here -->
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
         </header>
+
+        <!-- Profile Picture -->
+        <img src="profile.jpg" alt="Profile Picture" class="profile-pic" />
 
         <!-- Banner -->
         <section id="banner">
@@ -172,9 +195,9 @@
         <!-- Footer -->
         <footer id="footer">
             <ul class="icons">
-                <li><a href="https://twitter.com" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
-                <li><a href="https://facebook.com" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
-                <li><a href="https://instagram.com" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="https://x.com/sivananda_2003?t=_QZyYryszaLRFbgfMo7Xnw&s=08" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="https://www.facebook.com/share/y5zfsjKYTZET3rfp/?mibextid=qi2Omg" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                <li><a href="https://www.instagram.com/n.a.n.d.a_21?igsh=MWJpMWJjbGlseDh6cA==" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
                 <li><a href="https://dribbble.com" class="icon brands fa-dribbble"><span class="label">Dribbble</span></a></li>
                 <li><a href="mailto:sivanandac666@gmail.com" class="icon solid fa-envelope"><span class="label">Email</span></a></li>
             </ul>
@@ -212,6 +235,20 @@
         });
         document.querySelector('.more.scrolly').addEventListener('click', function () {
             document.querySelector('#education').scrollIntoView({ behavior: 'smooth' });
+        });
+
+        // Show/hide profile picture based on scroll position
+        document.addEventListener('scroll', function() {
+            const profilePic = document.querySelector('.profile-pic');
+            const homeSection = document.querySelector('#banner');
+            const homeSectionBottom = homeSection.getBoundingClientRect().bottom;
+
+            // Check if the user is within the home section
+            if (homeSectionBottom > 0) {
+                profilePic.classList.add('visible');
+            } else {
+                profilePic.classList.remove('visible');
+            }
         });
     </script>
 </body>
